@@ -13,13 +13,13 @@ router = APIRouter(prefix="/api/occupy", tags=["占道施工"])
 service = OccupyService()
 
 LIST_FIELDS = ["施工编号", "施工位置", "占用范围", "施工内容", "申请人", "审批人", "占用期限", "施工状态"]
-STATUSES = ["待审批", "已批准", "施工中", "已恢复"]
+STATUSES = ["待审批", "已批准", "施工中", "已完工", "已恢复"]
 
 
 @router.get("", response_model=PageResult[dict])
 def list_entries(
     keyword: str | None = Query(default=None, description="按施工编号检索"),
-    status: str | None = Query(default=None, description="待审批、已批准、施工中、已恢复"),
+    status: str | None = Query(default=None, description="待审批、已批准、施工中、已完工、已恢复"),
     page: int = 1,
     size: int = 20,
 ) -> PageResult[dict]:
@@ -50,9 +50,9 @@ def create_entry(payload: EntryPayload) -> ActionResult:
 
 @router.post("/{entry_id}/actions", response_model=ActionResult)
 def run_action(entry_id: int, payload: EntryPayload) -> ActionResult:
-    """对单条占道施工执行审批通过、开始施工、恢复通行；不允许的动作会被拦下并说明原因。"""
+    """对单条占道施工执行审批通过、开始施工、完工确认、恢复通行；不允许的动作会被拦下并说明原因。"""
     action = str(payload.values.get("action") or "").strip()
-    entry, message = service.run_action(entry_id, action)
+    entry, message = service.run_action(entry_id, action, payload.values)
     if entry is None:
         return ActionResult(ok=False, message=message)
     return ActionResult(ok=True, message=message, entry=entry)

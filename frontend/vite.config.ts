@@ -26,6 +26,18 @@ export default defineConfig({
       },
     },
   },
+  // preview（npm run preview，serve 构建产物）与 dev 保持同一套代理，
+  // 这样 scripts/dev-up.sh 起的是构建产物，自检走的链路和手工 preview 一致。
+  preview: {
+    host: '127.0.0.1',
+    port: 5173,
+    proxy: {
+      '/api': {
+        target: proxyTarget,
+        changeOrigin: true,
+      },
+    },
+  },
   build: {
     outDir: 'dist',
     sourcemap: false,
