@@ -33,3 +33,13 @@ body { margin: 0; background: #f6f8fb; color: #1f2937; }
 .link { border: none; background: none; color: var(--brand); cursor: pointer; padding: 0; }
 .page-foot { display: flex; justify-content: space-between; margin-top: 8px; font-size: 12px; color: var(--muted); }
 .error-text { color: #b42318; }
+.success-text { color: #067647; }
+.modal-mask { position: fixed; inset: 0; background: rgba(15, 23, 42, .45); display: flex; align-items: center; justify-content: center; z-index: 50; }
+.modal-card { background: #fff; border-radius: 10px; width: 460px; max-width: calc(100vw - 32px); padding: 18px 20px; box-shadow: 0 18px 48px rgba(15, 23, 42, .25); }
+.modal-title { margin: 0 0 14px; font-size: 16px; }
+.form-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
+.form-grid label span { display: block; font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+.form-grid input, .form-grid textarea { width: 100%; border: 1px solid var(--border); border-radius: 6px; padding: 7px 9px; font: inherit; }
+.form-grid textarea { min-height: 56px; resize: vertical; }
+.modal-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 16px; }
+.form-error { color: #b42318; font-size: 12px; margin: 8px 0 0; min-height: 16px; }

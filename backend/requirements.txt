@@ -1,3 +1,6 @@
-fastapi>=0.110
-uvicorn[standard]>=0.29
-pydantic>=2.6
+# 直接依赖：版本固定到具体发布版本（不是 >= / ~=），保证任何机器装出同一份。
+# 完整传递依赖（含哈希无关的精确版本）见 requirements.lock，由 pip freeze 生成。
+fastapi==0.141.1
+uvicorn[standard]==0.54.0
+pydantic==2.13.5
+python-dotenv==1.2.3
